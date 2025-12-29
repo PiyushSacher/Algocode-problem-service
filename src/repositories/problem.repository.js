@@ -23,7 +23,22 @@ async function getAllProblems(){
         throw error;
     }
 }
+
+async function getProblemById(problemId){
+  try{
+    const problem=await Problem.findOne({_id:problemId});
+    if(!problem){
+      throw new NotFound("Problem",problemId);
+    }
+    return problem;
+  }catch(error){
+    console.error("Error fetching problem by ID:", error);
+    throw error;
+  }
+
+}
 module.exports = {
   createProblem,
-  getAllProblems
+  getAllProblems,
+  getProblemById
 };

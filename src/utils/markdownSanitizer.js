@@ -11,7 +11,7 @@ function sanitizeMarkdown(markdownContent){
 
     //santized html
     const sanitizedHtml=sanitizeHtml(convertedHtml,{
-        allowedTags:sanitizeHtml.defaults.allowedTags
+        allowedTags:sanitizeHtml.defaults.allowedTags.concat(["img"]),
     })
     const sanitizeMd=turndownService.turndown(sanitizedHtml);
     return sanitizeMd;

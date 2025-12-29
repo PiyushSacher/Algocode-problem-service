@@ -16,9 +16,14 @@ async function addProblem(req, res, next) {
   }
 }
 
-function getProblem(req,res,next){
-    
-
+async function getProblem(req,res,next){
+    const problemId=req.params.id;
+    const problem=await ProblemService.getProblemById(problemId);
+    return res.status(StatusCodes.OK).json({
+        success:true,
+        error:{},
+        data:problem
+    });
 }
 
 async function getProblems(req,res,next){
