@@ -11,7 +11,6 @@ const problemSchema=new mongoose.Schema({
     difficulty:{
         type:String,
         enum:["easy","medium","hard"],
-        required:[true,"Difficulty cannot be empty"],
         default:"easy"
     },
     testCases:[

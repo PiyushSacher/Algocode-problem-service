@@ -1,22 +1,34 @@
 const {StatusCodes} =require("http-status-codes");
-const UnImplemented = require("../errors/unimplemented.error");
+const {ProblemService}=require("../services/index");
 
-function addProblem(req,res,next){
-    try{
-        throw new UnImplemented("Add Problem not implemented");
-    }catch(err){
-        next(err);
-    }
+async function addProblem(req, res, next) {
+  try {
+    console.log("Adding new problem:", req.body);
+    const newProblem = await ProblemService.createProblem(req.body);
+
+    return res.status(StatusCodes.CREATED).json({
+      success: true,
+      error: {},
+      data: newProblem
+    });
+  } catch (err) {
+    next(err);
+  }
 }
 
 function getProblem(req,res,next){
-    return res.status(StatusCodes.NOT_IMPLEMENTED).json({message:"Not implemented"});
+    
 
 }
 
-function getProblems(req,res,next){
-    return res.status(StatusCodes.NOT_IMPLEMENTED).json({message:"Not implemented"});
-
+async function getProblems(req,res,next){
+    console.log("Fetching all problems");
+    const allProblems=await ProblemService.getAllProblems();
+    return res.status(StatusCodes.OK).json({
+        success:true,
+        error:{},
+        data:allProblems
+    });
 }
 
 function deleteProblem(req,res,next){

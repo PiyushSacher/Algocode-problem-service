@@ -2,11 +2,13 @@ const express=require("express");
 const {PORT}=require("./config/server.config")
 const app=express();
 const apiRouter=require("./routes/index");
-const BaseError = require("./errors/base.error");
 const errorHandler = require("./utils/errorHandler");
 const connectDB = require("./config/db.config");
+
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+
 
 
 app.use("/api",apiRouter)
