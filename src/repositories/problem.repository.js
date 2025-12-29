@@ -37,8 +37,23 @@ async function getProblemById(problemId){
   }
 
 }
+
+async function deleteProblemById(problemId) {
+  try {
+    const result = await Problem.deleteOne({ _id: problemId });
+    if (result.deletedCount === 0) {
+      throw new NotFound("Problem", problemId);
+    }
+    return { message: "Problem deleted successfully" };
+  } catch (error) {
+    console.error("Error deleting problem by ID:", error);
+    throw error;
+  }
+}
+
 module.exports = {
   createProblem,
   getAllProblems,
-  getProblemById
+  getProblemById,
+  deleteProblemById
 };

@@ -17,8 +17,13 @@ async function getProblemById(problemId){
   return await ProblemRepository.getProblemById(problemId);
 }
 
+async function deleteProblemById(problemId) {
+  return await ProblemRepository.deleteProblemById(problemId);
+}
+
 module.exports = {
   createProblem,
   getAllProblems,
-  getProblemById
+  getProblemById,
+  deleteProblemById 
 };
