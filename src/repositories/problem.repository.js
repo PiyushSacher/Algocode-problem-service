@@ -1,3 +1,4 @@
+const logger = require("../config/logger.config");
 const { Problem } = require("../models/index");
 
 async function createProblem(problemData) {
@@ -35,13 +36,13 @@ async function getProblemById(problemId){
     console.error("Error fetching problem by ID:", error);
     throw error;
   }
-
 }
 
 async function deleteProblemById(problemId) {
   try {
-    const result = await Problem.deleteOne({ _id: problemId });
-    if (result.deletedCount === 0) {
+    const result = await Problem.findByIdAndDelete(problemId);
+    if (!result) {
+      logger.error(`Problem with ID ${problemId} not found in the db`);
       throw new NotFound("Problem", problemId);
     }
     return { message: "Problem deleted successfully" };
